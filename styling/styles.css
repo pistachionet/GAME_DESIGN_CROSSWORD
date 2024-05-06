@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
+    display: flexbox;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -8,9 +8,20 @@ body {
     background-image: url("ken carson.jpeg") ;
 }
 
+.gameName{
+    text-align: center;
+    color: aliceblue;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 31px;
+}
+
 .container {
     text-align: center;
     background: white;
+    margin-left: 25%;
+    width: 750px;
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
