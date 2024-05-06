@@ -91,7 +91,7 @@
             alert("You lose!");
             document.getElementById('crosswordIframe').style.pointerEvents = 'none';
             setTimeout(() => {
-                window.location.href = 'landing.html';
+                window.location.href = 'index.html';
             }, 3000);
         }
 
@@ -130,7 +130,7 @@
             winSound.onended = function () {
                 alert("Congratulations, you completed the puzzle!");
                 setTimeout(() => {
-                    window.location.href = 'landing.html';
+                    window.location.href = 'index.html';
                 }, 1000);  // Redirect after a short delay to let the alert show
             };
         }
