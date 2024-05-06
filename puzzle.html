@@ -1,19 +1,143 @@
-<html>
-    <head>
-        <title>Puzzle Work</title>
-    </head>
-    <body>
-        <h1>Puzzled</h1>
-        <iframe width="500" 
-        height="500" 
-        style="border:3px solid black; margin:auto; display:block" 
-        frameborder="0" 
-        src="https://crosswordlabs.com/embed/anime-characters-41"></iframe>
+<!DOCTYPE html>
+<html lang="en">
 
-        <script>
-            const links = ["https://crosswordlabs.com/embed/anime-characters-41"]
-            let puzzle = links[0]
+<head>
+    <title>Puzzle Work</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="styling/puzzle.css" rel="stylesheet" type="text/css">
+</head>
 
-        </script>
-    </body>
+<body>
+    <audio id="backgroundMusic" src="styling/backgroundmusic.mp3" type="audio/mpeg" autoplay></audio>
+
+    <!-- Title -->
+    <svg viewBox="0 0 1200 300">
+        <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Aubrey’s Angels.</text>
+            <text text-anchor="middle" x="50.5%" y="80%">Aubrey’s Angels.</text>
+            <text text-anchor="middle" x="51%" y="80%">Aubrey’s Angels.</text>
+
+
+        </symbol>
+
+        <g class="g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+        </g>
+    </svg>
+    <!-- ------------------------------ END --------------------------- -->
+
+    <iframe id="crosswordIframe" width="500" height="500" style="border:3px solid black; margin:auto; display:block"
+        frameborder="0" src="https://crosswordlabs.com/embed/anime-831"></iframe>
+
+    <div id="timer-container">
+        <span id="timer" class="countdown font-mono text-6xl">00:00</span>
+    </div>
+
+    <div class="finished-button">
+        <audio id="winSound" src="styling/you-win-sequence-2-183949.mp3" type="audio/mpeg"></audio>
+        <button style="width: 20%; margin-bottom: 10px;" class="btn btn-success" onclick="puzzleCompleted()">I
+            finished!</button>
+
+    </div>
+
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const difficulty = urlParams.get('difficulty');
+        let timeInSeconds;
+
+        switch (difficulty) {
+            case 'easy':
+                timeInSeconds = 300; // 5 minutes
+                break;
+            case 'medium':
+                timeInSeconds = 60; // 1 minute
+                break;
+            case 'hard':
+                timeInSeconds = 30; // 30 seconds
+                break;
+            default:
+                timeInSeconds = 300; // Default to 5 minutes
+        }
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                    gameOver();
+                }
+            }, 1000);
+        }
+
+        function gameOver() {
+            var backgroundMusic = document.getElementById('backgroundMusic');
+            backgroundMusic.pause();  // Stop the background music when the game is over
+            alert("You lose!");
+            document.getElementById('crosswordIframe').style.pointerEvents = 'none';
+            setTimeout(() => {
+                window.location.href = 'landing.html';
+            }, 3000);
+        }
+
+        window.onload = function () {
+            var display = document.getElementById("timer");
+            startTimer(timeInSeconds, display);
+            playBackgroundMusic();  // Attempt to play music on load
+        };
+
+        function playBackgroundMusic() {
+            var backgroundMusic = document.getElementById('backgroundMusic');
+            if (backgroundMusic.paused) {
+                var playPromise = backgroundMusic.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Automatic playback started!
+                    }).catch(error => {
+                        // Auto-play was prevented
+                        // Show a UI element to let the user manually start playback
+                        console.log("Playback prevented. Click to start playing...");
+                    });
+                }
+            }
+        }
+
+        function puzzleCompleted() {
+            var backgroundMusic = document.getElementById('backgroundMusic');
+            var winSound = document.getElementById('winSound');
+
+            backgroundMusic.pause();
+            backgroundMusic.currentTime = 0;  // Reset the background music
+
+            winSound.play();
+
+            winSound.onended = function () {
+                alert("Congratulations, you completed the puzzle!");
+                setTimeout(() => {
+                    window.location.href = 'landing.html';
+                }, 1000);  // Redirect after a short delay to let the alert show
+            };
+        }
+    </script>
+
+
+
+</body>z
+
 </html>
