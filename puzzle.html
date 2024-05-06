@@ -12,11 +12,11 @@
     <audio id="backgroundMusic" src="styling/backgroundmusic.mp3" type="audio/mpeg" autoplay></audio>
 
     <!-- Title -->
-    <svg viewBox="0 0 1200 300">
+    <svg viewBox="0 0 1600 300">
         <symbol id="s-text">
-            <text text-anchor="middle" x="50%" y="80%">Aubrey’s Angels.</text>
-            <text text-anchor="middle" x="50.5%" y="80%">Aubrey’s Angels.</text>
-            <text text-anchor="middle" x="51%" y="80%">Aubrey’s Angels.</text>
+            <text text-anchor="middle" x="50%" y="80%">Crossword Crusaders!</text>
+            <text text-anchor="middle" x="50.5%" y="80%">Crossword Crusaders!</text>
+            <text text-anchor="middle" x="51%" y="80%">Crossword Crusaders!</text>
 
 
         </symbol>
@@ -133,6 +133,17 @@
                     window.location.href = 'index.html';
                 }, 1000);  // Redirect after a short delay to let the alert show
             };
+        }
+
+        function randomPuzzle() {
+            const links = ["https://crosswordlabs.com/embed/anime-831"]
+            // get random index value
+            const randomIndex = Math.floor(Math.random() * arr.length);
+
+            // get random item
+            const item = arr[randomIndex];
+
+            return links[randomIndex];
         }
     </script>
 

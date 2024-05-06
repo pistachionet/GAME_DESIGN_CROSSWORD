@@ -81,14 +81,12 @@ svg {
 }
 
 
-
 .finished-button{
   display: flex;
   justify-content: center;
 }
 
 
-/* CSS */
 #fin {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
